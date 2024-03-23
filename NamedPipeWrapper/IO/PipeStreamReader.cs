@@ -5,7 +5,8 @@ using System.IO.Pipes;
 using System.Linq;
 using System.Net;
 using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
+using System.Text.Json;
+using System.Text;
 
 namespace NamedPipeWrapper.IO
 {
@@ -25,8 +26,6 @@ namespace NamedPipeWrapper.IO
         /// Gets a value indicating whether the pipe is connected or not.
         /// </summary>
         public bool IsConnected { get; private set; }
-
-        private readonly BinaryFormatter _binaryFormatter = new BinaryFormatter();
 
         /// <summary>
         /// Constructs a new <c>PipeStreamReader</c> object that reads data from the given <paramref name="stream"/>.
@@ -68,7 +67,8 @@ namespace NamedPipeWrapper.IO
             BaseStream.Read(data, 0, len);
             using (var memoryStream = new MemoryStream(data))
             {
-                return (T) _binaryFormatter.Deserialize(memoryStream);
+                var obj = JsonSerializer.Deserialize<T>(memoryStream, Globals.JsonOptions);
+                return obj;
             }
         }
 
