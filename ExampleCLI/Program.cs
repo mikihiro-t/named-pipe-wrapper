@@ -12,12 +12,7 @@ namespace ExampleCLI
 
         static void Main(string[] args)
         {
-            var isServer = true;
-#if DEBUG
-            isServer = false;
-
-#endif
-            if (isServer || (args.Length >= 1 && string.Equals("/server", args[0], StringComparison.OrdinalIgnoreCase)))
+            if ((args.Length >= 1 && string.Equals("/server", args[0], StringComparison.OrdinalIgnoreCase)))
             {
                 Console.WriteLine("Running in SERVER mode");
                 Console.WriteLine("Press 'q' to exit");

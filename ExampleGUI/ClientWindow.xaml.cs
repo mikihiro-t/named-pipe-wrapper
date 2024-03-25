@@ -34,7 +34,6 @@ namespace ExampleGUI
         private void OnServerMessage(NamedPipeConnection<string, string> connection, string message)
         {
             AddLine("Server", message);
-
         }
 
         private void OnDisconnected(NamedPipeConnection<string, string> connection)
@@ -50,7 +49,6 @@ namespace ExampleGUI
                 paragraph.Inlines.Add(new Run(" : "));
                 paragraph.Inlines.Add(new Run(content));
                 richTextBoxMessages.Document.Blocks.Add(paragraph);
-                //richTextBoxMessages.AppendText(Environment.NewLine + "<div>" + content + "</div>");
             }));
         }
 

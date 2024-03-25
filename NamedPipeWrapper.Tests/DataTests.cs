@@ -13,13 +13,10 @@ public class DataTests : IDisposable
     static DataTests()
     {
         var layout = new PatternLayout("%-6timestamp %-5level - %message%newline");
-        var appender = new FileAppender { Layout = layout };//  new ConsoleAppender { Layout = layout };
+        var appender = new ConsoleAppender { Layout = layout };
         layout.ActivateOptions();
-        appender.AppendToFile = true;
-        appender.File = "log-file.txt";
         appender.ActivateOptions();
         BasicConfigurator.Configure(appender);
-
     }
 
     private const string PipeName = "data_test_pipe";
@@ -38,14 +35,9 @@ public class DataTests : IDisposable
 
     #region Setup and teardown
 
-    private static bool hasSetup = false;
-
     public void SetUp()
     {
-        //if (hasSetup) return;
-        hasSetup = true;
-
-        Logger.Debug("▼Setting up test...");
+        Logger.Debug("Setting up test...");
 
         _barrier.Reset();
 
@@ -103,7 +95,7 @@ public class DataTests : IDisposable
 
         Logger.Debug("Client and server stopped");
         Logger.DebugFormat("Test took {0}", (DateTime.Now - _startTime));
-        Logger.Debug("▲~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        Logger.Debug("~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
 
     #endregion
@@ -138,7 +130,6 @@ public class DataTests : IDisposable
         Assert.True(_actualHash is not null, "Server should have received a zero-byte message from the client");
         Assert.True(_expectedHash == _actualHash, "SHA-1 hashes for zero-byte message should match");
         Assert.False(_clientDisconnected, "Server should not disconnect the client for explicitly sending zero-length data");
-        //TearDown();
     }
 
     [Fact]
@@ -151,7 +142,6 @@ public class DataTests : IDisposable
         Assert.True(_actualHash is not null, string.Format("Server should have received client's {0} byte message", numBytes));
         Assert.True(_expectedHash == _actualHash, string.Format("SHA-1 hashes for {0} byte message should match", numBytes));
         Assert.False(_clientDisconnected, "Server should still be connected to the client");
-        //TearDown();
     }
 
     [Fact]
@@ -164,7 +154,6 @@ public class DataTests : IDisposable
         Assert.True(_actualHash is not null, string.Format("Server should have received client's {0} byte message", numBytes));
         Assert.True(_expectedHash == _actualHash, string.Format("SHA-1 hashes for {0} byte message should match", numBytes));
         Assert.False(_clientDisconnected, "Server should still be connected to the client");
-        //TearDown();
     }
 
     [Fact]
@@ -177,7 +166,6 @@ public class DataTests : IDisposable
         Assert.True(_actualHash is not null, string.Format("Server should have received client's {0} byte message", numBytes));
         Assert.True(_expectedHash == _actualHash, string.Format("SHA-1 hashes for {0} byte message should match", numBytes));
         Assert.False(_clientDisconnected, "Server should still be connected to the client");
-        //TearDown();
     }
 
     [Fact]
@@ -190,7 +178,6 @@ public class DataTests : IDisposable
         Assert.True(_actualHash is not null, string.Format("Server should have received client's {0} byte message", numBytes));
         Assert.True(_expectedHash == _actualHash, string.Format("SHA-1 hashes for {0} byte message should match", numBytes));
         Assert.False(_clientDisconnected, "Server should still be connected to the client");
-        //TearDown();
     }
 
     [Fact]
@@ -203,7 +190,6 @@ public class DataTests : IDisposable
         Assert.True(_actualHash is not null, string.Format("Server should have received client's {0} byte message", numBytes));
         Assert.True(_expectedHash == _actualHash, string.Format("SHA-1 hashes for {0} byte message should match", numBytes));
         Assert.False(_clientDisconnected, "Server should still be connected to the client");
-        //TearDown();
     }
 
     [Fact]
@@ -216,7 +202,6 @@ public class DataTests : IDisposable
         Assert.True(_actualHash is not null, string.Format("Server should have received client's {0} byte message", numBytes));
         Assert.True(_expectedHash == _actualHash, string.Format("SHA-1 hashes for {0} byte message should match", numBytes));
         Assert.False(_clientDisconnected, "Server should still be connected to the client");
-        //TearDown();
     }
 
     [Fact]
@@ -229,7 +214,6 @@ public class DataTests : IDisposable
         Assert.True(_actualHash is not null, string.Format("Server should have received client's {0} byte message", numBytes));
         Assert.True(_expectedHash == _actualHash, string.Format("SHA-1 hashes for {0} byte message should match", numBytes));
         Assert.False(_clientDisconnected, "Server should still be connected to the client");
-        //TearDown();
     }
 
     [Fact]
@@ -242,7 +226,6 @@ public class DataTests : IDisposable
         Assert.True(_actualHash is not null, string.Format("Server should have received client's {0} byte message", numBytes));
         Assert.True(_expectedHash == _actualHash, string.Format("SHA-1 hashes for {0} byte message should match", numBytes));
         Assert.False(_clientDisconnected, "Server should still be connected to the client");
-        //TearDown();
     }
 
     [Fact]
@@ -255,7 +238,6 @@ public class DataTests : IDisposable
         Assert.True(_actualHash is not null, string.Format("Server should have received client's {0} byte message", numBytes));
         Assert.True(_expectedHash == _actualHash, string.Format("SHA-1 hashes for {0} byte message should match", numBytes));
         Assert.False(_clientDisconnected, "Server should still be connected to the client");
-        //TearDown();
     }
 
     [Fact]
@@ -268,7 +250,6 @@ public class DataTests : IDisposable
         Assert.True(_actualHash is not null, string.Format("Server should have received client's {0} byte message", numBytes));
         Assert.True(_expectedHash == _actualHash, string.Format("SHA-1 hashes for {0} byte message should match", numBytes));
         Assert.False(_clientDisconnected, "Server should still be connected to the client");
-        //TearDown();
     }
 
     [Fact]
@@ -281,7 +262,6 @@ public class DataTests : IDisposable
         Assert.True(_actualHash is not null, string.Format("Server should have received client's {0} byte message", numBytes));
         Assert.True(_expectedHash == _actualHash, string.Format("SHA-1 hashes for {0} byte message should match", numBytes));
         Assert.False(_clientDisconnected, "Server should still be connected to the client");
-        //TearDown();
     }
 
     [Fact]
@@ -314,7 +294,6 @@ public class DataTests : IDisposable
         Assert.True(_actualHash is not null, string.Format("Server should have received client's {0} byte message", numBytes));
         Assert.True(_expectedHash == _actualHash, string.Format("SHA-1 hashes for {0} byte message should match", numBytes));
         Assert.False(_clientDisconnected, "Server should still be connected to the client");
-        //TearDown();
     }
 
     [Fact]
@@ -347,7 +326,6 @@ public class DataTests : IDisposable
         Assert.True(_actualHash is not null, string.Format("Server should have received client's {0} byte message", numBytes));
         Assert.True(_expectedHash == _actualHash, string.Format("SHA-1 hashes for {0} byte message should match", numBytes));
         Assert.False(_clientDisconnected, "Server should still be connected to the client");
-        //TearDown();
     }
 
     #endregion
@@ -392,6 +370,7 @@ public class DataTests : IDisposable
             return sb.ToString();
         }
     }
+    #endregion
     private bool disposedValue;
     protected virtual void Dispose(bool disposing)
     {
@@ -406,9 +385,7 @@ public class DataTests : IDisposable
     }
     public void Dispose()
     {
-        // このコードを変更しないでください。クリーンアップ コードを 'Dispose(bool disposing)' メソッドに記述します
         Dispose(disposing: true);
         GC.SuppressFinalize(this);
     }
-    #endregion
 }

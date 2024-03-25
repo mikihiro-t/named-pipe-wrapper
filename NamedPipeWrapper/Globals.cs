@@ -13,11 +13,7 @@ namespace NamedPipeWrapper
     {
         public static readonly JsonSerializerOptions JsonOptions = new()
         {
-            //PropertyNamingPolicy = null,
-            //WriteIndented = true,
-            //AllowTrailingCommas = true,
-            //DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-            ReferenceHandler = ReferenceHandler.Preserve,  //cyclical references
+            ReferenceHandler = ReferenceHandler.Preserve,  //cyclical references OK
         };
     }
 }

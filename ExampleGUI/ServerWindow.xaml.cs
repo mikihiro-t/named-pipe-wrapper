@@ -52,7 +52,6 @@ namespace ExampleGUI
                 paragraph.Inlines.Add(new Run(" : "));
                 paragraph.Inlines.Add(new Run(content));
                 richTextBoxMessages.Document.Blocks.Add(paragraph);
-                //richTextBoxMessages.AppendText(Environment.NewLine + "<div>" + content + "</div>");
             }));
         }
 

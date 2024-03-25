@@ -84,6 +84,7 @@ client.Start();
 This is a fork of [Named Pipe Wrapper](https://github.com/acdvorak/named-pipe-wrapper).
 
 # MIT License
+Copyright (c) 2013 Andrew C. Dvorak <andy@andydvorak.net>  
 Copyright (c) 2024 Taisidô Mikihiro ([Ganges](https://ganges.pro/))
 
 Also See [Credits](CREDITS.md)

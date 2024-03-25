@@ -280,11 +280,9 @@ namespace NamedPipeWrapper
 
         public static NamedPipeServerStream CreatePipe(string pipeName, PipeSecurity pipeSecurity)
         {
-            //https://stackoverflow.com/a/78004181
             var stream = new NamedPipeServerStream(pipeName, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.Asynchronous | PipeOptions.WriteThrough, 0, 0);
             if (pipeSecurity is not null) stream.SetAccessControl(pipeSecurity); //Windows Only
             return stream;
-            //return new NamedPipeServerStream(pipeName, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.Asynchronous | PipeOptions.WriteThrough, 0, 0, pipeSecurity);
         }
     }
 }

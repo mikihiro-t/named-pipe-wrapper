@@ -5,7 +5,6 @@ using System.IO.Pipes;
 using System.Linq;
 using System.Net;
 using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.Json;
 
 namespace NamedPipeWrapper.IO
@@ -42,16 +41,6 @@ namespace NamedPipeWrapper.IO
             {
                 var byteArray = JsonSerializer.SerializeToUtf8Bytes(obj, Globals.JsonOptions);
                 return byteArray;
-
-                using (var memoryStream = new MemoryStream())
-                {
-              
-                    //byte[] byteObj = Binary.ObjectToByteArray(obj);
-                    //return byteObj; 
-                    JsonSerializer.Serialize(memoryStream, obj, Globals.JsonOptions);
-                    //_binaryFormatter.Serialize(memoryStream, obj);
-                    return memoryStream.ToArray();
-                }
             }
             catch
             {
