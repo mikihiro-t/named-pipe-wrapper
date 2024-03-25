@@ -6,6 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Text.Json.Serialization;
+using System.Text.Json;
+using System.Text;
 
 namespace NamedPipeWrapper.IO
 {
@@ -26,7 +29,7 @@ namespace NamedPipeWrapper.IO
         /// </summary>
         public bool IsConnected { get; private set; }
 
-        private readonly BinaryFormatter _binaryFormatter = new BinaryFormatter();
+        //private readonly BinaryFormatter _binaryFormatter = new BinaryFormatter();
 
         /// <summary>
         /// Constructs a new <c>PipeStreamReader</c> object that reads data from the given <paramref name="stream"/>.
@@ -68,7 +71,14 @@ namespace NamedPipeWrapper.IO
             BaseStream.Read(data, 0, len);
             using (var memoryStream = new MemoryStream(data))
             {
-                return (T) _binaryFormatter.Deserialize(memoryStream);
+                //byteArray[count++] = (byte)memoryStream.ReadByte();
+                //var o = Binary.ByteArrayToObject<T>(memoryStream.ToArray());
+                //return o;
+
+                var obj = JsonSerializer.Deserialize<T>(memoryStream, Globals.JsonOptions);
+               
+                return obj;
+                //return (T) _binaryFormatter.Deserialize(memoryStream);
             }
         }
 
@@ -84,6 +94,46 @@ namespace NamedPipeWrapper.IO
         {
             var len = ReadLength();
             return len == 0 ? default(T) : ReadObject(len);
+        }
+    }
+
+    /// <summary>
+    /// https://stackoverflow.com/a/68050536
+    /// </summary>
+    public static class Binary
+    {
+        /// <summary>
+        /// Convert an object to a Byte Array.
+        /// </summary>
+        public static byte[] ObjectToByteArray(object objData)
+        {
+            if (objData == null)
+                return default;
+
+            return Encoding.UTF8.GetBytes(JsonSerializer.Serialize(objData, GetJsonSerializerOptions()));
+        }
+
+        /// <summary>
+        /// Convert a byte array to an Object of T.
+        /// </summary>
+        public static T ByteArrayToObject<T>(byte[] byteArray)
+        {
+            if (byteArray == null || !byteArray.Any())
+                return default;
+
+            return JsonSerializer.Deserialize<T>(byteArray, GetJsonSerializerOptions());
+        }
+
+        public static JsonSerializerOptions GetJsonSerializerOptions()
+        {
+            return new JsonSerializerOptions()
+            {
+                PropertyNamingPolicy = null,
+                WriteIndented = true,
+                AllowTrailingCommas = true,
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+                ReferenceHandler = ReferenceHandler.Preserve,  //cyclical references
+            };
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Text.Json;
 
 namespace NamedPipeWrapper.IO
 {
@@ -21,7 +22,7 @@ namespace NamedPipeWrapper.IO
         /// </summary>
         public PipeStream BaseStream { get; private set; }
 
-        private readonly BinaryFormatter _binaryFormatter = new BinaryFormatter();
+        //private readonly BinaryFormatter _binaryFormatter = new BinaryFormatter();
 
         /// <summary>
         /// Constructs a new <c>PipeStreamWriter</c> object that writes to given <paramref name="stream"/>.
@@ -39,9 +40,16 @@ namespace NamedPipeWrapper.IO
         {
             try
             {
+                var byteArray = JsonSerializer.SerializeToUtf8Bytes(obj, Globals.JsonOptions);
+                return byteArray;
+
                 using (var memoryStream = new MemoryStream())
                 {
-                    _binaryFormatter.Serialize(memoryStream, obj);
+              
+                    //byte[] byteObj = Binary.ObjectToByteArray(obj);
+                    //return byteObj; 
+                    JsonSerializer.Serialize(memoryStream, obj, Globals.JsonOptions);
+                    //_binaryFormatter.Serialize(memoryStream, obj);
                     return memoryStream.ToArray();
                 }
             }
