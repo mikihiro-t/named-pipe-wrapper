@@ -1,24 +1,24 @@
 # Credits
 
 ## Original Project
-- [Named Pipe Wrapper](https://github.com/acdvorak/named-pipe-wrapper)
-Copyright (c) 2013 Andrew C. Dvorak <andy@andydvorak.net>
+- [Named Pipe Wrapper](https://github.com/acdvorak/named-pipe-wrapper)  
+Copyright (c) 2013 Andrew C. Dvorak <andy@andydvorak.net>  
 MIT License
 
 ## Others
-- [coverlet](https://github.com/coverlet-coverage/coverlet)
-Copyright (c) 2018 Toni Solarin-Sodara
+- [coverlet](https://github.com/coverlet-coverage/coverlet)  
+Copyright (c) 2018 Toni Solarin-Sodara  
 MIT License
 
-- [Microsoft.NET.Test.Sdk](https://github.com/microsoft/vstest)
-Copyright (c) Microsoft Corporation
+- [Microsoft.NET.Test.Sdk](https://github.com/microsoft/vstest)  
+Copyright (c) Microsoft Corporation  
 MIT License
 
-- [log4net](https://logging.apache.org/log4net/)
+- [log4net](https://logging.apache.org/log4net/)  
 Apache License 2.0
 
 ---
-- [xunit](https://github.com/xunit/xunit)
+- [xunit](https://github.com/xunit/xunit)  
 
  Unless otherwise noted, the source code here is covered by the following license:
 
