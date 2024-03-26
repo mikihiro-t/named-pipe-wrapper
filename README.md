@@ -80,6 +80,9 @@ client.Start();
 - Changed WinForm to WPF on ExampleGUI.
 - Changed nUnit to xUnit Test.
 
+# Changes for porting
+[Changes in NamedPipeWrapper Project](https://qiita.com/hiro_t/items/4e59bf931471795ebc1f)
+
 # Original Project
 This is a fork of [Named Pipe Wrapper](https://github.com/acdvorak/named-pipe-wrapper).
 
